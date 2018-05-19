@@ -315,9 +315,21 @@
     color: #696969;
   } */
 }
-@media (min-width: 768px) and (max-width: 991px) {}
+@media (min-width: 768px) and (max-width: 991px) {
+  .archive {
+    text-align: center;
+  }
+  .nav-container {
+    width: 100%;
+  }
+}
 @media (min-width: 992px) and (max-width: 1199px) {
-  
+  .archive {
+    text-align: center;
+  }
+  .nav-container {
+    width: 100%;
+  }
 }
 
 .container {
@@ -367,6 +379,11 @@
   .modal-close {
     top:60px;
     right: 30px;
+  }
+
+  .tags {
+    float: right;
+    width: 75%;
   }
 }
 
@@ -526,8 +543,6 @@ article {
 
 /* 标签页 */
 .tags {
-  float: right;
-  width: 75%;
   box-sizing: border-box;
   margin-top: 2em;
   padding: 2em;
