@@ -9,6 +9,14 @@
   border-right: 1px solid #ccc;
 }
 
+/* .side-nav::before {
+  content: '';
+  display: block;
+  border: 50px solid;
+  border-color: turquoise transparent transparent;
+  width: 0;
+} */
+
 .nav-logo {
   margin-top: 180px;
 }
@@ -113,7 +121,7 @@
   position: fixed;
   left: 0; top: 0; right: 0; bottom: 0;
   background-color: rgba(255, 255, 255, .95);
-  z-index: 2;
+  z-index: 3;
   transition: all .3s ease-in-out;
 }
 
@@ -550,6 +558,10 @@ article {
 
 .tags-box {
   overflow: hidden;
+}
+
+.tags-box span {
+  display: none;
 }
 
 .tags-box a {
