@@ -8,7 +8,7 @@
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>ppttfish的博客</title>
+  <title>css实例之下滑隐藏导航栏 | ppttfish的博客</title>
   <style type="text/css">
     .icon {
        width: 1em; height: 1em;
@@ -24,6 +24,12 @@
 
   <body>
     <div class="side-nav">
+   
+    <div class="side-nav-directory">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-mulu1"></use>
+      </svg>
+    </div>
   
 
   <div class="nav-logo">
@@ -199,55 +205,41 @@
 </div>
 
 
-    <div class="archive content">
-    
-      
-      <h1>js</h1>
-
-      
-        
-        
-          
-        
-          
-        
-        
-      
-        
-        
-          
-        
-          
-        
-        
-      
-        
-        
-          
-        
-          
-        
-        
-      
-        
-        
-        
-      
-          
-    
-    
-    <div class="">
-      
-      
-        <div class="year-list">
-          <h1>2018</h1>
-          <ul>
-            
-          </ul>
-        </div>
-          
+    <article class="content">
+    <div class="post">
+    <div class="post-title">
+        <h1><a >css实例之下滑隐藏导航栏</a></h1>
     </div>
-</div>
+    <div class="post-mate">
+        <i class="iconfont icon-04"></i>
+        <time class="post-time">2018-05-21</time>
+        <ul class="post-tags">
+         
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/css/">css</a>
+            </li>
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/demo/">demo</a>
+            </li>
+              
+        
+        </ul>
+    </div>
+    <div class="article-head  markdown">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在写这个<code>hexo</code>主题的过程中，学会了蛮多样式实现的方法，所以就不要白瞎了这些方法，一个一个记下来，最好再做成一个<code>demo</code>页面，把这些小demo一个一个都放上去，23333333333333333333。</p>
+<p>想起来做 <em>下滑隐藏导航栏</em> 是因为做目录的时候，发现点击标题锚点跳转到的地点顶部被导航栏遮挡住了，于是就想来可以通过判断滚动条是上滑还是下滑来进行显示和隐藏的设置，提升阅读体验。同理其实，返回顶部在一定距离的显示和隐藏也是通过判断滚动条距离顶部的距离(<code>scollTop</code>)来设置的。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>整体思想都是，滚动条滑动的时候，判断它是上滑还是下滑，然后做出相应的设置，上滑显示，下滑隐藏。然后具体就是<em>通过比较滑动的相对值是正还是负</em>来判断是上滑还是下滑。</p>
+<p>刚刚开始想的是</p>
+
+    </div>
+    <div id="comment"></div>
+    <div class="aside">我是目录</div>
+</article>
+
     <footer>
   <div id="return-top" class="return-top">
     <img src="/pic/rocket-launch.svg" width="35px" height="35px" alt="">
