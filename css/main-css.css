@@ -8,6 +8,18 @@
   background-color: #fff;
 }
 
+.side-nav-directory {
+  position: absolute;
+  right: 0;
+}
+
+.side-nav-directory svg {
+  margin: .5em;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
 /* .side-nav::before {
   content: '';
   display: block;
@@ -90,16 +102,6 @@
   /* color: #F4606C; */
   color: #b70038;
 }
-
-/* .li-indicator {
-  position: absolute;
-  bottom: 0;
-  left: 10px;
-  background-color: #F4606C;
-  width: 50px;
-  height: 2px;
-  transition:  all .3s;
-} */
 
 .search-btn {
   display: inline-block;
