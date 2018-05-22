@@ -342,7 +342,7 @@
   }
 
   .modal-head {
-    margin: 20px 0 0px 4px;
+    margin: 20px 0 0px 4px; 
   }
 
   /* article .post-title {
@@ -691,3 +691,4 @@ article {
   margin-right: 2em;
   color: #999;
 }
+

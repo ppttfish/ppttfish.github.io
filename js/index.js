@@ -87,8 +87,5 @@
   closeBtn[1].addEventListener('click', closeSearch, false);
 
   console.log('你，\n一会看我，\n一会看云，\n我觉得，\n你看我时很远，\n你看云时很近\n');
-
-
-
 })();
 

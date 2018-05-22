@@ -68,6 +68,10 @@ code, pre {
   width: 50%;
 }
 
+.markdown u {
+  letter-spacing: 1px;
+}
+
 
 /* js语法高亮 */
 span .function {

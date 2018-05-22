@@ -8,7 +8,7 @@
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>ppttfish的博客</title>
+  <title>css实例之中间展开下划线 | ppttfish的博客</title>
   <style type="text/css">
     .icon {
        width: 1em; height: 1em;
@@ -24,6 +24,12 @@
 
   <body>
     <div class="side-nav">
+   
+    <div class="side-nav-directory">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-mulu1"></use>
+      </svg>
+    </div>
   
 
   <div class="nav-logo">
@@ -199,59 +205,46 @@
 </div>
 
 
-    <div class="archive content">
-    
-      
-      <h1>flex</h1>
-
-      
-        
-        
-          
-        
-          
-        
-        
-      
-        
-        
-          
-        
-          
-        
-        
-      
-        
-        
-          
-        
-          
-        
-        
-      
-        
-        
-          
-        
-          
-        
-        
-      
-          
-    
-    
-    <div class="">
-      
-      
-        <div class="year-list">
-          <span class="archive-year">2018</span>
-          <ul>
-            
-          </ul>
-        </div>
-          
+    <article class="content">
+    <div class="post">
+    <div class="post-title">
+        <h1><a >css实例之中间展开下划线</a></h1>
     </div>
-</div>
+    <div class="post-mate">
+        <i class="iconfont icon-04"></i>
+        <time class="post-time">2018-05-12</time>
+        <ul class="post-tags">
+         
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/css/">css</a>
+            </li>
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/demo/">demo</a>
+            </li>
+              
+        
+        </ul>
+    </div>
+    <div class="article-head  markdown">
+        <p>逛别人博客的时候发现有个好玩的东西，就是触发标题hover事件的时候，下划线是从中间向两边展开。</p>
+<p>我开始想着直接用border实现，先给boder设置为0，然后<code>hover</code>的时候变为1px，添加了<code>tansition</code>属性后，发现行不通。于是又仔细看了一下，发现人家用的是伪元素实现的，看得差不多后开始自己实验。</p>
+<a id="more"></a>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>文档结构如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>我是标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>css属性</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">display</span>: inline-block; <span class="comment">/* 让h1的宽度为自身长度，而不是充满父元素*/</span></span><br><span class="line">    			   <span class="comment">/* 因为block元素默认宽度为父元素 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%); <span class="comment">/* 核心，从中间向两边展开 */</span></span><br><span class="line">    <span class="attribute">border-bottom</span>: solid;</span><br><span class="line">    <span class="attribute">transition</span>: all .<span class="number">2s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.test-title</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体效果看我文章标题。</p>
+<p>打完收工。</p>
+
+    </div>
+    <div id="comment"></div>
+    <div class="aside">我是目录</div>
+</article>
+
     <footer>
   <div id="return-top" class="return-top">
     <img src="/pic/rocket-launch.svg" width="35px" height="35px" alt="">
