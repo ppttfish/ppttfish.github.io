@@ -3,7 +3,8 @@
   <head>
   <meta charset="utf-8">
   
-    <link rel="icon" href="/favicon.svg">
+    <link rel="shortcut icon" href="/fish.png" type="image/x-icon" />
+    <!-- <link rel="icon" href="/fish.png">  -->
   
 
   
@@ -235,7 +236,7 @@
 <h3 id="1-绑定构造函数"><a href="#1-绑定构造函数" class="headerlink" title="1.绑定构造函数"></a>1.绑定构造函数</h3><p>在子类函数里边直接调用父类函数，这样在创建子类实例的时候，就会添加父类的属性。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.type = <span class="string">'动物'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    Animal.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>); <span class="comment">//这里在new Cat的时候 给Cat的实例绑定										   //Animal的属性</span></span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat(<span class="string">'花花'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(cat.type); <span class="comment">// 动物</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="2-prototype的几种方法"><a href="#2-prototype的几种方法" class="headerlink" title="2.prototype的几种方法"></a>2.prototype的几种方法</h3><h4 id="2-1prototype方法"><a href="#2-1prototype方法" class="headerlink" title="2.1prototype方法"></a>2.1prototype方法</h4><p>通过直接new一个父类的实例对象，并把这个对象赋值给子类的prototype，这样子类的实例对象就会拥有父类的属性。<br>值得注意的是，在操作prototype属性的时候，需要在操作完，在把prototype.constructor改回去，不然会造成继承的紊乱，阮老师是这样说的：</p>
 <blockquote>
-<p>原来，任何一个prototype对象都有一个constructor属性，指向它的构造函数。如果没有”Cat.prototype = new Animal();”这一行，Cat.prototype.constructor是指向Cat的；加了这一行以后，Cat.prototype.constructor指向Animal。</p>
+<p>原来，任何一个prototype对象都有一个<code>constructor</code>属性，指向它的构造函数。如果没有”Cat.prototype = new Animal();”这一行，Cat.prototype.constructor是指向<code>Cat</code>的；加了这一行以后，Cat.prototype.constructor指向<code>Animal</code>。</p>
 </blockquote>
 <p>所以阮老师是这样建议的：</p>
 <blockquote>
