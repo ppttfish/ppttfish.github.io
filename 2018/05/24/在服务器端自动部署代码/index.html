@@ -9,7 +9,7 @@
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>ppttfish的博客</title>
+  <title>在vps服务器端自动部署代码 | ppttfish的博客</title>
   <style type="text/css">
     .icon {
        width: 1em; height: 1em;
@@ -25,6 +25,12 @@
 
   <body>
     <div class="side-nav">
+   
+    <div class="side-nav-directory">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-mulu1"></use>
+      </svg>
+    </div>
   
 
   <div class="nav-logo">
@@ -200,72 +206,52 @@
 </div>
 
 
-    <div class="archive content">
- 
-    
-      
-    
-    
-    <div class="">
- 
-      
-        <div class="year-list">
-          <span class="archive-year">2018</span>
-          <ul>
-            
-              <li >
-                <time>05-24</time>
-                <span> » </span>
-                <a href="/2018/05/24/在服务器端自动部署代码/">
-                  在vps服务器端自动部署代码
-                </a>
-              </li>
-            
-              <li >
-                <time>05-24</time>
-                <span> » </span>
-                <a href="/2018/05/24/vps搭建node运行环境/">
-                  vps搭建node运行环境
-                </a>
-              </li>
-            
-              <li >
-                <time>05-21</time>
-                <span> » </span>
-                <a href="/2018/05/21/css实例之下滑隐藏导航栏/">
-                  css实例之下滑隐藏导航栏
-                </a>
-              </li>
-            
-              <li >
-                <time>05-14</time>
-                <span> » </span>
-                <a href="/2018/05/14/flex布局/">
-                  flex布局
-                </a>
-              </li>
-            
-              <li >
-                <time>05-11</time>
-                <span> » </span>
-                <a href="/2018/05/12/css实例之中间展开下划线/">
-                  css实例之中间展开下划线
-                </a>
-              </li>
-            
-              <li >
-                <time>05-09</time>
-                <span> » </span>
-                <a href="/2018/05/10/继承学习笔记/">
-                  继承的三种实现
-                </a>
-              </li>
-            
-          </ul>
-        </div>
-          
+    <article class="content">
+    <div class="post">
+    <div class="post-title">
+        <h1><a >在vps服务器端自动部署代码</a></h1>
     </div>
-</div>
+    <div class="post-mate">
+        <i class="iconfont icon-04"></i>
+        <time class="post-time">2018-05-24</time>
+        <ul class="post-tags">
+         
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/vps/">vps</a>
+            </li>
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/debian/">debian</a>
+            </li>
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/git/">git</a>
+            </li>
+              
+        
+        </ul>
+    </div>
+    <div class="article-head  markdown">
+        <p>之前不是在我的<code>vps</code>里边配置了<code>node环境</code>，然后就可以开始愉快的在服务器端跑我的程序了。</p>
+<p>不过每次都通过<code>FileZilla</code>上传文件不仅麻烦，而且慢的很，那么有什么其他好办法呢？</p>
+<p>当然有！之前不是在服务器里装了git吗，我们可以在搭一个git服务器，然后本地写好之后，直接push上去，岂不是美滋滋~</p>
+<a id="more"></a>
+<h2 id="搭建Git服务器"><a href="#搭建Git服务器" class="headerlink" title="搭建Git服务器"></a>搭建Git服务器</h2><p>首先放出来廖雪峰老师的<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000" target="_blank" rel="noopener">博客</a>，之前学习git就是看他的博客入的门。</p>
+<p>然后我再这这里记录一下我的过程，其中有一点改动的配置。</p>
+<h3 id="1-在服务器上创建一个裸仓库"><a href="#1-在服务器上创建一个裸仓库" class="headerlink" title="1.在服务器上创建一个裸仓库"></a>1.在服务器上创建一个裸仓库</h3><blockquote>
+<p>值得注意的是本地给这个<code>裸仓库</code>push代码，在裸仓库目录下是看不到的，即，裸仓库是没有<code>工作区</code>的，如何进行自动部署，下文会慢慢讲到，当然也可以直接点我传送。</p>
+</blockquote>
+<p>在<code>/home/user/repos/</code>下创建裸仓库 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init --bare /home/user/repos/project.git</span><br></pre></td></tr></table></figure>
+
+    </div>
+    <div id="comment"></div>
+</article>
+
     <footer>
   <div id="return-top" class="return-top">
     <img src="/pic/rocket-launch.svg" width="35px" height="35px" alt="">
