@@ -54,6 +54,12 @@ blockquote {
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
 }
 
+@media (max-width: 1199px) {
+  .markdown figure {
+    width: 100%;
+  }
+}
+
 .markdown figure pre {
   margin: 0 .5em;
 }
@@ -70,6 +76,7 @@ blockquote {
   border-radius: 2px;
   background-color: #f8f8f8;
   font-size: .9em;
+  white-space: pre-line;
 }
 
 .markdown a {

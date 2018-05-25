@@ -9,7 +9,7 @@
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>在vps服务器端自动部署代码 | ppttfish的博客</title>
+  <title>利用git在vps服务器端自动部署代码 | ppttfish的博客</title>
   <style type="text/css">
     .icon {
        width: 1em; height: 1em;
@@ -209,7 +209,7 @@
     <article class="content">
     <div class="post">
     <div class="post-title">
-        <h1><a >在vps服务器端自动部署代码</a></h1>
+        <h1><a >利用git在vps服务器端自动部署代码</a></h1>
     </div>
     <div class="post-mate">
         <i class="iconfont icon-04"></i>
@@ -242,11 +242,50 @@
 <a id="more"></a>
 <h2 id="搭建Git服务器"><a href="#搭建Git服务器" class="headerlink" title="搭建Git服务器"></a>搭建Git服务器</h2><p>首先放出来廖雪峰老师的<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000" target="_blank" rel="noopener">博客</a>，之前学习git就是看他的博客入的门。</p>
 <p>然后我再这这里记录一下我的过程，其中有一点改动的配置。</p>
-<h3 id="1-在服务器上创建一个裸仓库"><a href="#1-在服务器上创建一个裸仓库" class="headerlink" title="1.在服务器上创建一个裸仓库"></a>1.在服务器上创建一个裸仓库</h3><blockquote>
+<h3 id="1-创建git用户"><a href="#1-创建git用户" class="headerlink" title="1.创建git用户"></a>1.创建git用户</h3><p>这里默认你已经在服务器安装好了git，如果没有，安装命令 → <code>$ sudo apt-get install git</code></p>
+<p>然后添加一个git用户，命令：<code>$ sudo adduser git</code></p>
+<h3 id="2-创建证书登录"><a href="#2-创建证书登录" class="headerlink" title="2.创建证书登录"></a>2.创建证书登录</h3><p>找到你自己电脑本地的<code>公钥</code>，在<code>.ssh/</code>这个目录里边，它长这个样子<code>id_rsa.pub</code>。</p>
+<p>假如没有的话，生成一个，命令为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>按照提示，一路回车默认。</p>
+<p>现在把你的公钥添加到服务器<code>/home/git/.ssh/authorized_keys</code>文件里，假如要添加多个公钥，每行一个。</p>
+<p>假如<code>authorized_keys</code>不存在，<code>touch /home/git/.ssh/authorized_key</code>即可。</p>
+<p>设置好之后，顺便设置<code>禁止shell登录</code>，命令：<code>vi /etc/passwd</code>，然后找到类似下面的这一行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git:x:1001:1001:,,,:/home/git:/bin/bash</span><br></pre></td></tr></table></figure>
+<p>改为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
+<p>这样，<code>git</code>用户可以正常通过ssh使用git，但无法登录shell，因为我们为<code>git</code>用户指定的<code>git-shell</code>每次一登录就自动退出。</p>
+<h3 id="3-在服务器上创建一个裸仓库"><a href="#3-在服务器上创建一个裸仓库" class="headerlink" title="3.在服务器上创建一个裸仓库"></a>3.在服务器上创建一个裸仓库</h3><blockquote>
 <p>值得注意的是本地给这个<code>裸仓库</code>push代码，在裸仓库目录下是看不到的，即，裸仓库是没有<code>工作区</code>的，如何进行自动部署，下文会慢慢讲到，当然也可以直接点我传送。</p>
 </blockquote>
-<p>在<code>/home/user/repos/</code>下创建裸仓库 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init --bare /home/user/repos/project.git</span><br></pre></td></tr></table></figure>
+<p>在<code>/home/repos/</code>下创建裸仓库 ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/repos</span><br><span class="line">git init --bare /home/repos/repos.git</span><br></pre></td></tr></table></figure>
+<p><code>--bare</code>就是用来创建裸仓库的指令。</p>
+<h3 id="4-本地连接远程仓库"><a href="#4-本地连接远程仓库" class="headerlink" title="4.本地连接远程仓库"></a>4.本地连接远程仓库</h3><p>现在就可以在本地克隆服务器上边的仓库了，命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@server:/home/repos/repos.git</span><br></pre></td></tr></table></figure>
+<p><code>server</code>是你的服务器ip，默认端口是<code>22</code>,假如更改过ssh端口，需要使用ssh协议克隆。</p>
+<p>假设你的<code>服务器域名</code>为<code>example.com</code>，<code>ssh端口</code>为<code>8848</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> ssh://git@example.com:8848/home/repos/repos.git</span><br></pre></td></tr></table></figure>
+<p>这样有时候会让你输入git用户的密码，就是刚刚<code>adduser git</code>设置的那个账号的密码。</p>
+<p>或者也可以在本地<code>.sss/config</code>添加映射别名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host gitserver		 <span class="comment">#这个是随便起的，等会跟在git@后边</span></span><br><span class="line">HostName example.com <span class="comment">#你的主机ip地址或者绑定的域名</span></span><br><span class="line">User git</span><br><span class="line">Port 8848            <span class="comment">#ssh的端口号</span></span><br><span class="line">IdentityFile ~/.ssh/server_rsa</span><br></pre></td></tr></table></figure>
+<p>然后就可以使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git<span class="comment">#gitserver:/home/repos/repos.git</span></span><br></pre></td></tr></table></figure>
+<p>至此就完成了git服务器的搭建，但是现在往服务器仓库<code>push</code>代码，在相应的服务器仓库下是看不到的，因为它是一个裸仓库，没有工作区，我们只能通过<code>pull</code>才能看到。但是这样手工操作很麻烦，所以接下来就是自动化部署代码，通过<code>hook</code>帮助我们进行自动部署。<a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="noopener">关于hook的官方教程</a></p>
+<h2 id="自动部署代码"><a href="#自动部署代码" class="headerlink" title="自动部署代码"></a>自动部署代码</h2><p>思路就是，在服务器端我们新建一个普通仓库，利用<code>服务器端钩子</code>的<code>post-receive</code>，当本地向服务器裸仓库提交代码时，自动克隆代码到我们的这个普通仓库。</p>
+<blockquote>
+<p><code>post-receive</code> 挂钩在整个过程完结以后运行，可以用来更新其他系统服务或者通知用户。 它接受与 <code>pre-receive</code> 相同的标准输入数据。 它的用途包括给某个邮件列表发信，通知持续集成（continous integration）的服务器，或者更新问题追踪系统（ticket-tracking system） —— 甚至可以通过分析提交信息来决定某个问题（ticket）是否应该被开启，修改或者关闭。 该脚本无法终止推送进程，不过客户端在它结束运行之前将保持连接状态，所以如果你想做其他操作需谨慎使用它，因为它将耗费你很长的一段时间。</p>
+</blockquote>
+<h3 id="1-在服务器上创建一个普通仓库"><a href="#1-在服务器上创建一个普通仓库" class="headerlink" title="1.在服务器上创建一个普通仓库"></a>1.在服务器上创建一个普通仓库</h3><p>在服务器上边创建一个普通的git仓库，用来存放程序的源代码。</p>
+<p>在<code>/home/project/</code>下创建普通仓库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/project &amp;&amp; <span class="built_in">cd</span> /home/project</span><br><span class="line">git init</span><br><span class="line">git <span class="built_in">clone</span> /home/repos/repos.git</span><br></pre></td></tr></table></figure>
+<p>这样就完成了仓库的克隆。</p>
+<h3 id="3-配置Git-hook"><a href="#3-配置Git-hook" class="headerlink" title="3.配置Git hook"></a>3.配置Git hook</h3><p>在刚刚创建的裸仓库的<code>hooks</code>目录下新建一个文件<code>post-receive</code>(假如没有的话，有的话直接打开)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch /home/repos/hooks/post-receive</span><br></pre></td></tr></table></figure>
+<p>然后进行如下设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">unset</span> GIT_DIR</span><br><span class="line"></span><br><span class="line">NowPath=`<span class="built_in">pwd</span>`</span><br><span class="line">DeployPath=<span class="string">"../../project"</span>  <span class="comment">#相对你普通仓库的路径</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$DeployPath</span></span><br><span class="line">git add . -A &amp;&amp; git stash</span><br><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$NowPath</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deploy done"</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p>默认的情况下，脚本是无法执行的，所以我们需要为这个脚本添加可执行权限 <code>chmod +x post-receive</code></p>
+<p>现在就可以直接向服务器push了，它会自动帮你部署到你服务器端的普通仓库。</p>
 
     </div>
     <div id="comment"></div>
