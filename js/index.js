@@ -6,6 +6,7 @@
   var closeBtn = document.getElementsByClassName('modal-close');
   var returnTop = document.getElementById('return-top');
   var navContainer = document.getElementsByClassName('nav-container')[0];
+  console.log(closeBtn);
   
   const getScollTop= () => document.documentElement.scrollTop || document.body.scrollTop;
 
@@ -17,12 +18,10 @@
       var windowWidth = window.screen.availWidth;
 
       if (scrollTop > getScollTop()) {
-        console.log('up');
         $(navContainer).fadeIn();
         scrollTop = getScollTop();
       } else if(scrollTop < getScollTop() && (windowWidth > 1200) && (getScollTop() > 110)) {
         $(navContainer).fadeOut();
-        console.log('down');
         scrollTop = getScollTop();
       } else {
         scrollTop = getScollTop();
@@ -66,6 +65,8 @@
 
   function showMoboileMenu() {
     menuModal.style.display = 'block';
+    // $('#menu-dialog').animate({height: "300px"});
+    // $(menuModal).show();
   }
 
   function showSearch() {
@@ -73,7 +74,8 @@
   }
 
   function closeMobileMenu() {
-    menuModal.style.display = 'none';
+    // menuModal.style.display = 'none';
+    $(menuModal).fadeOut();
   }
 
   function closeSearch() {
