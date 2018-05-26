@@ -241,10 +241,10 @@
     <div class="article-head  markdown">
         <p>之前不是在我的<code>vps</code>里边配置了<code>node环境</code>，然后就可以开始愉快的在服务器端跑我的程序了。</p>
 <p>不过每次都通过<code>FileZilla</code>上传文件不仅麻烦，而且慢的很，那么有什么其他好办法呢？🤔🤔🤔</p>
-<p>当然有！之前不是在服务器里装了git吗，我们可以在搭一个git服务器，然后本地写好之后，直接push上去，岂不是美滋滋~</p>
+<p>当然有！之前不是在服务器里装了git吗，我们可以再搭一个git服务器，然后本地写好之后，直接push上去，岂不是美滋滋~</p>
 <a id="more"></a>
 <h2 id="搭建Git服务器"><a href="#搭建Git服务器" class="headerlink" title="搭建Git服务器"></a>搭建Git服务器</h2><p>首先放出来廖雪峰老师的<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000" target="_blank" rel="noopener">博客</a>，之前学习git就是看他的博客入的门。</p>
-<p>然后我再这这里记录一下我的过程，其中有一点改动的配置。</p>
+<p>然后我在这里记录一下我的过程，其中有一点改动的配置。</p>
 <h3 id="1-创建git用户"><a href="#1-创建git用户" class="headerlink" title="1.创建git用户"></a>1.创建git用户</h3><p>这里默认你已经在服务器安装好了git，如果没有，安装命令 → <code>$ sudo apt-get install git</code></p>
 <p>然后添加一个git用户，命令：<code>$ sudo adduser git</code></p>
 <h3 id="2-创建证书登录"><a href="#2-创建证书登录" class="headerlink" title="2.创建证书登录"></a>2.创建证书登录</h3><p>找到你自己电脑本地的<code>公钥</code>，在<code>.ssh/</code>这个目录里边，它长这个样子<code>id_rsa.pub</code>。</p>
@@ -291,7 +291,7 @@
 <p>现在就可以直接向服务器push了，它会自动帮你部署到你服务器端的普通仓库。</p>
 
     </div>
-    <div id="comment"></div>
+    <div id="disqus_thread"></div>
 </article>
 
     <footer>
@@ -313,36 +313,25 @@
     <script src="/js/iconfont.js"></script>
 <script src="/js/jquery.js"></script>
 <script src="/js/index.js"></script>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-
 <script>
-  new Valine({
-    el: '#comment' ,
-    notify:false, 
-    verify:true, 
-    appId: 'TTJ9PFLx5So5LclEbO8dxjYb-gzGzoHsz',
-    appKey: '66jwFogAxr3A0tsyz7UyonNr',
-    placeholder: 'just go go',
-    path:window.location.pathname, 
-    avatar:'retro' 
-  });
-</script>
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
-<script>
-  const gitalk = new Gitalk({
-    clientID: 'GitHub Application Client ID',
-    clientSecret: 'GitHub Application Client Secret',
-    repo: 'GitHub repo',
-    owner: 'GitHub repo owner',
-    admin: ['GitHub repo owner and collaborators, only these guys can initialize github issues'],
-    id: location.pathname,      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-</script> -->
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  */
+  (function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://ppttfish.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                              
   </body>
 </html>
