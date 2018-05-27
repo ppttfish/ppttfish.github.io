@@ -237,7 +237,9 @@
         <p>本来打算开始学习<code>sass</code>，结果不知道为啥今天看了一天<code>webpack</code>，官方文档看了前几节算是简单入了个门。在这里记录一下学习笔记。不定期更新系列…</p>
 <a id="more"></a>
 <h2 id="webpack能干什么？"><a href="#webpack能干什么？" class="headerlink" title="webpack能干什么？"></a>webpack能干什么？</h2><p>因为之前一直也没有用过打包工具，比如<code>Grunt</code>和<code>gulp</code>（虽然一直没有用过，但是对这两个工具倒是眼熟的很，<code>boostrap</code>官网的实例上边有他两的官网，还照着做过2333333）。所以并不清楚<code>webpack</code>到底是什么以及它能干嘛，经过简单的学习后，发现，<strong>卧槽</strong>？真好用。</p>
+<blockquote>
 <p>简单的说，webpack是一个程序模块打包器。它能把我们不同的程序模块，构建成一个包，而且在该包里产生一个映射图，通过该图，可以找到所有需要的依赖。</p>
+</blockquote>
 <p>也就是说，本来我们有两个js文件，<code>a.js</code>和<code>b.js</code>，而且存在a对b的依赖，正常的写法：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">srcipt</span> <span class="attr">src</span>=<span class="string">"./b.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">srcipt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">srcipt</span> <span class="attr">src</span>=<span class="string">"./a.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">srcipt</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>分别导入两个文件，通过webpack打包后，假设我们打包成了<code>bundle.js</code>，写为这样:</p>
