@@ -3,10 +3,11 @@
   <head>
   <meta charset="utf-8">
   
-    <link rel="shortcut icon" href="/fish.png" type="image/x-icon" />
-    <!-- <link rel="icon" href="/fish.png">  -->
+    <link rel="shortcut icon" href="/fish.png" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="/fish.png" type="image/vnd.microsoft.icon" />
   
 
+ 
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>vps搭建node运行环境 | ppttfish的博客</title>
@@ -240,7 +241,7 @@
     </div>
     <div class="article-head  markdown">
         <p>之前买了搬瓦工的vps，只是在上边搭翻墙的梯子，现在准备开始做demo页面时候，想着顺便可以用<code>node</code>写一点后台代码，于是开始在vps上配置node环境。</p>
-<p>我的vps安装的是<code>debian 9</code>，具体的安装以及设置可以移步去隔壁宿舍大佬的<a href="rinchan.me/index.php/archives/18/">博客</a>。我在这里只是记载一下我的步骤(简化了一些)。</p>
+<p>我的vps安装的是<code>debian 9</code>，具体的安装以及设置可以移步去隔壁宿舍大佬的<a href="https://rinchan.me/index.php/archives/18/" target="_blank" rel="noopener">博客</a>。我在这里只是记载一下我的步骤(简化了一些)。</p>
 <a id="more"></a>
 <h2 id="安装debian9"><a href="#安装debian9" class="headerlink" title="安装debian9"></a>安装debian9</h2><p>搬瓦工的<code>kiviVM</code>里边自带安装系统，找到<em>Install new os</em> 进行相关选择即可。</p>
 <p>然后远程登录你的服务器。</p>
@@ -249,6 +250,8 @@
 <p>比如我的端口改成了8848，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@服务器ip地址 -p 8848</span><br></pre></td></tr></table></figure>
 <p>连接之后开始更新你的<code>debian</code>并安装一些我们需要的软件，因为搬瓦工自带的系统是精简版，很多我们需要的东西都没有。</p>
+<h3 id="更新软件包"><a href="#更新软件包" class="headerlink" title="更新软件包"></a>更新软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt -y full-upgrade &amp;&amp; shutdown -r now</span><br></pre></td></tr></table></figure>
+<p>更新的时候会弹出一个界面，直接回车就行。</p>
 <h3 id="安装所需安装包"><a href="#安装所需安装包" class="headerlink" title="安装所需安装包"></a>安装所需安装包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt -y install sudo wget curl vim git unzip screen htop net-tools socat netcat build-essential libunwind8 virt-what dnsutils traceroute hdparm</span><br></pre></td></tr></table></figure>
 <p>上边的指令包括了我们需要的软件，列表如下</p>
 <blockquote>
@@ -289,7 +292,7 @@
 <p><em>查看iptables的配置信息</em> <code>iptables -L</code></p>
 <p>然后是配置代码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">sudo bash -c <span class="string">'echo "*filter</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">:INPUT ACCEPT [0:0]</span></span><br><span class="line"><span class="string">:FORWARD ACCEPT [0:0]</span></span><br><span class="line"><span class="string">:OUTPUT ACCEPT [0:0]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 允许本地回环地址进</span></span><br><span class="line"><span class="string">-A INPUT -i lo -j ACCEPT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 允许所有出</span></span><br><span class="line"><span class="string">-A OUTPUT -j ACCEPT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 允许已建立的连接进</span></span><br><span class="line"><span class="string">-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 允许被ping</span></span><br><span class="line"><span class="string">-A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 允许FTP:21，SSH:22，HTTP:80，HTTPS:443端口进</span></span><br><span class="line"><span class="string">-A INPUT -p tcp --dport 21 -j ACCEPT</span></span><br><span class="line"><span class="string">-A INPUT -p tcp --dport 22 -j ACCEPT</span></span><br><span class="line"><span class="string">-A INPUT -p tcp --dport 80 -j ACCEPT</span></span><br><span class="line"><span class="string">-A INPUT -p tcp --dport 443 -j ACCEPT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 记录iptables拒绝的调用</span></span><br><span class="line"><span class="string">-A INPUT -m limit --limit 5/min -j LOG --log-prefix \"iptables denied: \" --log-level 7</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 拒绝规则以外进</span></span><br><span class="line"><span class="string">-A INPUT -j REJECT</span></span><br><span class="line"><span class="string">-A FORWARD -j REJECT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">COMMIT" &gt;&gt; /etc/iptables.rules'</span></span><br></pre></td></tr></table></figure>
-<p><a href="rinchan.me/index.php/archives/18/">大佬</a>给的配置里边的注释已经说的很清楚了，需要说明的是是开启的端口号，上边的代码里边开启了<code>21</code>，<code>22</code>，<code>80</code>，<code>443</code>端口，如果你的服务器之前更改过端口，就把你的端口加上去。</p>
+<p>[大佬][blog]给的配置里边的注释已经说的很清楚了，需要说明的是是开启的端口号，上边的代码里边开启了<code>21</code>，<code>22</code>，<code>80</code>，<code>443</code>端口，如果你的服务器之前更改过端口，就把你的端口加上去。</p>
 <p>比如我的服务器默认端口为<code>8848</code>，我就在19行那里添加一条语句:</p>
 <p><code>-A INPUT -p tcp --dport 8848 -j ACCEPT</code> <em>注意-p的p是小写</em></p>
 <p>还有就是我跑node程序还需要额外监听一个端口，比如是<code>3000</code>，所以我还加了一条：</p>
