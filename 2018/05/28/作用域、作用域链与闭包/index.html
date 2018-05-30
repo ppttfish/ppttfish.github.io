@@ -228,17 +228,17 @@
             
             <li>
                 <i class="iconfont icon-06tags"></i>
+                <a href="/tags/学习笔记/">学习笔记</a>
+            </li>
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
                 <a href="/tags/js/">js</a>
             </li>
             
             <li>
                 <i class="iconfont icon-06tags"></i>
                 <a href="/tags/作用域/">作用域</a>
-            </li>
-            
-            <li>
-                <i class="iconfont icon-06tags"></i>
-                <a href="/tags/学习笔记/">学习笔记</a>
             </li>
               
         
@@ -253,7 +253,7 @@
 <p>比如全局变量的作用域就是全局，在JavaScript代码中的任何地方都是有定义的。而局部变量只在声明它们的函数体内有定义。</p>
 <p>所以作用域决定了哪些变量可以被函数访问。</p>
 <h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p>我简单的理解为，作用域链是一个作用域内的对象列表。</p>
-<p>比如在函数内，这些对象列表就保存了这个函数所有可访问的变量，包括全局变量和它内部定义的局部变量(在函数定义和执行时，它的作用域链是不同的)。</p>
+<p>比如在函数内，这个对象列表就保存了这个函数所有可访问的变量，包括全局变量和它内部定义的局部变量(在函数定义和执行时，它的作用域链是不同的)。</p>
 <p>当执行函数时，遇到一个变量，JavaScript就会进行变量解析，它先会从对象列表中第一个对象开始查找，如果找到同名变量就使用这个值，否则就顺着作用域链在下一个对象中继续查找。以此类推，如果在作用域链上都没有匹配到这个变量，则这个变量就视为未定义的。</p>
 <p>举个例子，有一个add()函数如下，</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = num1 + num2;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -264,7 +264,7 @@
 <h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包其实是一个函数，这个函数可以访问局部作用域之外的数据。本来在函数的外部是无法访问到函数内部的变量的，但是通过闭包，就可以实现这个功能。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greet</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> msg = <span class="string">'hello'</span>;</span><br><span class="line">    </span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hi = greet();</span><br><span class="line">hi(); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
 <p>按道理，<code>greet</code>函数在调用结束后，它就应该被释放了，在它里边定义的变量也不存在了，结果在外边，我们还是得到了这个变量的值。这就是闭包的特性，f2函数此时就是一个闭包。</p>
-<p>未完待续… …</p>
+<p>举一个之前用到的闭包实例。</p>
 
     </div>
     <div id="disqus_thread"></div>

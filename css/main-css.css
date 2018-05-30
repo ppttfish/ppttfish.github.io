@@ -60,6 +60,7 @@
   margin: 0 auto;
   background-color: #fff;
   box-shadow: rgba(26, 26, 26, 0.1) 0px 1px 3px;
+  z-index: 1;
 }
 
 .nav-logo {
