@@ -9,7 +9,7 @@
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>ppttfish的博客</title>
+  <title>重绘和重排 | ppttfish的博客</title>
   <style type="text/css">
     .icon {
        width: 1em; height: 1em;
@@ -25,6 +25,12 @@
 
   <body>
     <div class="side-nav">
+   
+    <div class="side-nav-directory">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-mulu1"></use>
+      </svg>
+    </div>
   
 
   <div class="nav-logo">
@@ -74,7 +80,7 @@
               
             
               
-                <li class="modal-nav-item-li active">
+                <li class="modal-nav-item-li">
                   <a href="/archives" class="modal-nav-item-link">所有文章</a>
                 </li>
               
@@ -156,7 +162,7 @@
         
       
         
-          <li class="nav-item-li active">
+          <li class="nav-item-li">
             <a href="/archives" class="nav-item-link">所有文章</a>
           </li>
         
@@ -191,112 +197,59 @@
 </div>
 
 
-    <div class="archive content">
- 
-    
-      
-    
-    
-    <div class="">
- 
-      
-        <div class="year-list">
-          <span class="archive-year">2018</span>
-          <ul>
-            
-              <li >
-                <time>11-11</time>
-                <span> » </span>
-                <a href="/2018/11/12/vps初次配置/">
-                  vps初次配置记录
-                </a>
-              </li>
-            
-              <li >
-                <time>06-03</time>
-                <span> » </span>
-                <a href="/2018/06/03/重绘和重排/">
-                  重绘和重排
-                </a>
-              </li>
-            
-              <li >
-                <time>05-31</time>
-                <span> » </span>
-                <a href="/2018/05/31/原型、原型链/">
-                  原型、原型链
-                </a>
-              </li>
-            
-              <li >
-                <time>05-28</time>
-                <span> » </span>
-                <a href="/2018/05/28/作用域、作用域链与闭包/">
-                  作用域、作用域链与闭包
-                </a>
-              </li>
-            
-              <li >
-                <time>05-27</time>
-                <span> » </span>
-                <a href="/2018/05/27/webpack学习笔记/">
-                  webpack学习笔记
-                </a>
-              </li>
-            
-              <li >
-                <time>05-26</time>
-                <span> » </span>
-                <a href="/2018/05/26/服务器端运行node程序/">
-                  服务器端运行node程序
-                </a>
-              </li>
-            
-              <li >
-                <time>05-24</time>
-                <span> » </span>
-                <a href="/2018/05/24/在服务器端自动部署代码/">
-                  利用git在vps服务器端自动部署代码
-                </a>
-              </li>
-            
-              <li >
-                <time>05-24</time>
-                <span> » </span>
-                <a href="/2018/05/24/vps搭建node运行环境/">
-                  vps搭建node运行环境
-                </a>
-              </li>
-            
-              <li >
-                <time>05-21</time>
-                <span> » </span>
-                <a href="/2018/05/21/css实例之下滑隐藏导航栏/">
-                  css实例之下滑隐藏导航栏
-                </a>
-              </li>
-            
-              <li >
-                <time>05-11</time>
-                <span> » </span>
-                <a href="/2018/05/12/css实例之中间展开下划线/">
-                  css实例之中间展开下划线
-                </a>
-              </li>
-            
-              <li >
-                <time>05-09</time>
-                <span> » </span>
-                <a href="/2018/05/10/继承学习笔记/">
-                  继承的三种实现
-                </a>
-              </li>
-            
-          </ul>
-        </div>
-          
+    <article class="content">
+    <div class="post">
+    <div class="post-title">
+        <h1><a >重绘和重排</a></h1>
     </div>
-</div>
+    <div class="post-mate">
+        <i class="iconfont icon-04"></i>
+        <time class="post-time">2018-06-03</time>
+        <ul class="post-tags">
+         
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/css/">css</a>
+            </li>
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
+                <a href="/tags/网页性能/">网页性能</a>
+            </li>
+              
+        
+        </ul>
+    </div>
+    <div class="article-head  markdown">
+        <p>浏览器在解析完所有资源后，会生成两个内部数据结构，表示页面结构的<code>DOM树</code>和表示DOM节点如何显示的<code>渲染树</code>。</p>
+<p>元素的几何属性变化的时候，同样其他元素的几何属性也会受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构建渲染树，这个过程就做<code>重排(reflow)</code>。</p>
+<p>重排之后，浏览器会重新绘制受到影响的部分到屏幕上，这个过程叫做<code>重绘(repaint)</code>。</p>
+<a id="more"></a>
+<h2 id="重排发生的时间"><a href="#重排发生的时间" class="headerlink" title="重排发生的时间"></a>重排发生的时间</h2><ul>
+<li>添加或删除可见的DOM元素。</li>
+<li>元素位置改变。</li>
+<li>元素尺寸改变(margin、padding、border、width、height)。</li>
+<li>内容改变。</li>
+<li>页面渲染器初始化。</li>
+<li>浏览器窗口尺寸改变。</li>
+<li>滚动条出现时。</li>
+</ul>
+<p>重绘和重排都是非常耗费资源，是导致网页性能低下的重要原因。</p>
+<h2 id="减少重排和重绘的方法"><a href="#减少重排和重绘的方法" class="headerlink" title="减少重排和重绘的方法"></a>减少重排和重绘的方法</h2><ul>
+<li>对于DOM的读(或写)操作尽量放在一起，而且不要在两个读操作中插入一个写操作。</li>
+<li>读DOM的结果如果使用次数大于一次，应该先储存起来。</li>
+<li>不要一条条的更改样式，而是通过改变class属性来更改样式。</li>
+<li>可以先将元素的<code>display</code>属性设置为<code>none</code>，然后在进行操作(期间无论对元素进行多少次操作)，最后再恢复元素显示，这样重排和重绘的次数只有2次，开始隐藏的一次和最后显示的一次。</li>
+<li><code>positon</code>为<code>absolute</code>和<code>fixed</code>的元素，重排开销较小，因为不用考虑对其他元素的影响。</li>
+<li>使用<code>虚拟DOM</code>的脚本库。</li>
+<li>使用window.requestAnimationFrame()、window.requestIdleCallback()这两个函数。</li>
+</ul>
+
+    </div>
+    <div id="disqus_thread"></div>
+</article>
+
     <footer>
   <div id="return-top" class="return-top">
     <img src="/pic/rocket-launch.svg" width="35px" height="35px" alt="">
