@@ -215,17 +215,17 @@
             
             <li>
                 <i class="iconfont icon-06tags"></i>
+                <a href="/tags/nginx/">nginx</a>
+            </li>
+            
+            <li>
+                <i class="iconfont icon-06tags"></i>
                 <a href="/tags/搬瓦工/">搬瓦工</a>
             </li>
             
             <li>
                 <i class="iconfont icon-06tags"></i>
                 <a href="/tags/域名/">域名</a>
-            </li>
-            
-            <li>
-                <i class="iconfont icon-06tags"></i>
-                <a href="/tags/nginx/">nginx</a>
             </li>
             
             <li>
@@ -255,20 +255,13 @@
 </ul>
 <p>主机记录就是域名前缀，常见用法有：</p>
 <ul>
-<li><p><strong>www</strong>：解析后的域名为<a href="http://www.aliyun.com。" target="_blank" rel="noopener">www.aliyun.com。</a></p>
-</li>
-<li><p><strong>@</strong>：直接解析主域名 aliyun.com。</p>
-</li>
-<li><p><strong>*</strong>：泛解析，匹配其他所有域名 *.aliyun.com。</p>
-</li>
-<li><p><strong>mail</strong>：将域名解析为mail.aliyun.com，通常用于解析邮箱服务器。</p>
-</li>
-<li><p><strong>二级域名</strong>：如：abc.aliyun.com，填写abc。</p>
-</li>
-<li><p><strong>手机网站：</strong>如：m.aliyun.com，填写m。</p>
-</li>
-<li><p><strong>显性URL：</strong>不支持泛解析（泛解析：将所有子域名解析到同一地址）</p>
-</li>
+<li><strong>www</strong>: 解析后的域名为<a href="http://www.xxx.com" target="_blank" rel="noopener">www.xxx.com</a></li>
+<li><strong>@</strong>: 直接解析主域名 xxx.com</li>
+<li><strong>*</strong>：泛解析，匹配其他所有域名 *.xxx.com</li>
+<li><strong>mail</strong>: 将域名解析为mail.xxx.com，通常用于解析邮箱服务器</li>
+<li><strong>二级域名</strong> 如：abc.xxx.com，填写abc</li>
+<li><strong>手机网站</strong>： 如：m.xxx.com，填写m</li>
+<li><strong>显性URL：</strong> 不支持泛解析 (泛解析：将所有子域名解析到同一地址）</li>
 </ul>
 <h2 id="服务器Nginx设置"><a href="#服务器Nginx设置" class="headerlink" title="服务器Nginx设置"></a>服务器Nginx设置</h2><h3 id="多域名指向同一个IP地址设置"><a href="#多域名指向同一个IP地址设置" class="headerlink" title="多域名指向同一个IP地址设置"></a>多域名指向同一个IP地址设置</h3><p>闹着玩多买了一个域名，就想着把两个域名指向同一个IP地址，然后通过Nginx来做代理，使得访问不同域名返回不同的页面。</p>
 <p>思路是这样：</p>
